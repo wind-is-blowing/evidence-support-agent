@@ -1,0 +1,381 @@
+{
+  "date": "2026-10-31",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "sha256": "56a0e7d91732c5a3dee2d6b8505cc1f998c401c4ca2b4c0990e7b4957762798c"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "66e6b17367503cb0333da49229f4c5b4b26484a7c47d5dd820361f9e3b624f6c"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "1a7f4107eb5af934683fa86fda090be41a6873e3b72a7580f08984b79fc21688"
+    },
+    {
+      "path": ".github/workflows/smoke.yml",
+      "sha256": "3423f9624546f2079b49eaf8b85043beb69826cb9a49aab3ba129165087d192b"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "6d77d35dc2c08e35efb431361c3b1c58c0850c755ac815cfdc4c56bf086e057f"
+    },
+    {
+      "path": "PACKAGE_VALIDATION.json",
+      "sha256": "90c43c677de7bbc94a8bba0a8b85fd158ba8387fa9fd57e087cc33c3a5685060"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8add968035031b1b7810721179ae9e347637f8211ab3662be6d01e41e0a644e4"
+    },
+    {
+      "path": "alembic.ini",
+      "sha256": "7532ac32eec15df4a5476ed7aafe3396d51d4538f89b37fe22a8c05da370935f"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "a496f8dcdadf4e10bc5179e7a70890155e740a8b1edd2dab5785625755c7aa8d"
+    },
+    {
+      "path": "data/README.md",
+      "sha256": "fc46cc686b5cade6324cb3b91e14703d15562234278634bc785393e95fd90c9f"
+    },
+    {
+      "path": "data/contest.jsonl",
+      "sha256": "1f3f373dabe3607828b6344d381418a26356ebbff53ef841833a7ab419e23fb5"
+    },
+    {
+      "path": "data/demo.jsonl",
+      "sha256": "3b39d6277e3fbb1447526a75cbf3a96eae6228c5693e234c3415a605166cf8fd"
+    },
+    {
+      "path": "data/fixtures/README.md",
+      "sha256": "068b57bd55122bfe40367960b6e3be60fc3c3b7ec98dc9dd356ff02bf49d65e0"
+    },
+    {
+      "path": "data/fixtures/s1-pro-e73.png",
+      "sha256": "3d6d0755cd3bb06b756d6ea858268b7693cdc4bd96c0281532f92fe48822351c"
+    },
+    {
+      "path": "data/official_expansion_2026-10-08.jsonl",
+      "sha256": "29953672c387c7f657a2b208d8b087644879c4f21d6bb5f50c3b03db75ac7a2e"
+    },
+    {
+      "path": "data/official_products_2026-10-08.jsonl",
+      "sha256": "2691686d1be3543816a78d340078fffa28b27202ff14749e0feae3e170590b43"
+    },
+    {
+      "path": "data/response_manual.jsonl",
+      "sha256": "13161fafa1f84a6d6857debc3fb3ba721389c719e8c25e998bf8b33854701e8d"
+    },
+    {
+      "path": "data/response_manual_expansion_2026-10-08.jsonl",
+      "sha256": "852ee40c0b0b9b00e27beb84b95f157b344dd9043f334890c540581444d758ca"
+    },
+    {
+      "path": "data/sources.jsonl",
+      "sha256": "0b7374986cf906ee925e656d8307eaf49febdcc0fab6d0a37a1c8a0348a00359"
+    },
+    {
+      "path": "data/store_demo.jsonl",
+      "sha256": "a93f33e4b9fa0c499fbf018f63e026808b48d583d94cfff62c03ec96e69accda"
+    },
+    {
+      "path": "deploy/Caddyfile",
+      "sha256": "483ded4c7a41a9458b5dedb4e5d3fbe1a679b664f2c8633cdf34681932713f4f"
+    },
+    {
+      "path": "deploy/Dockerfile",
+      "sha256": "f8acb1b728fa91ed71006ccfd801aef8804a47a38f2393eb274fa21ca2de28ef"
+    },
+    {
+      "path": "deploy/init-roles.sh",
+      "sha256": "9e2fe3653ecf24d84d8f1b079995073da10ce9d22ed0cfe262253bf7be6f5230"
+    },
+    {
+      "path": "docs/EVALUATION.md",
+      "sha256": "ca24181e14aae11b63e3c6a9c853c7a3a2a289f81fce8c78882727be28951259"
+    },
+    {
+      "path": "docs/THIRD_PARTY.md",
+      "sha256": "1224a1b31ef7899235e71927ff50f2006a895aea464e8574ded40abe8c3f2c61"
+    },
+    {
+      "path": "migrations/env.py",
+      "sha256": "4631e75a2682064188e1293939afd3a3efefa87c9375c4ee2940bcf039f9478a"
+    },
+    {
+      "path": "migrations/security.sql",
+      "sha256": "dd453f408e2c05f8705ddd8c4fd5a5f99ba1dcceeb43a318f47860b2eab97df2"
+    },
+    {
+      "path": "migrations/versions/0001_initial.py",
+      "sha256": "a59e06f1fae75fedc826e7f690c742f4fc0da26928e59340dd1ff23d718cad15"
+    },
+    {
+      "path": "migrations/versions/0002_maintenance.py",
+      "sha256": "3cf0b7ae958c514c2c6b7384b131867387d4e7230a2705f2ad804439a94ac28a"
+    },
+    {
+      "path": "migrations/versions/0003_recovery_gate.py",
+      "sha256": "4a1956743911fb9b514666a218ce0d7728d214de24b891577eabf16ed893bdc0"
+    },
+    {
+      "path": "migrations/versions/0004_orphan_model_budget.py",
+      "sha256": "117b83e28a92bcc4a011129d6386312714f84aeaaf52a7c05c3e853dd9d46d7d"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "3333c41afce31242d31d171519de8bccc4afd3752ede4e5258a0de20bdcabad8"
+    },
+    {
+      "path": "scripts/demo.py",
+      "sha256": "5ec9dda0c4b763917b0cb052634ed593b73a1e3d5c2a304df1bcdfe1f9724f3e"
+    },
+    {
+      "path": "skills/escalation-and-followup/SKILL.md",
+      "sha256": "9fd986424d1c275911525fe7048e0d36451c283e646850944b7afb77719ee94c"
+    },
+    {
+      "path": "skills/guided-troubleshooting/SKILL.md",
+      "sha256": "94df50b72eb0e8e151979e1f0c7a6c472336deb1c5c409d6ed0b04538543dbfa"
+    },
+    {
+      "path": "skills/purchase-and-warranty/SKILL.md",
+      "sha256": "54f37b8ccb8f9559f93d29852c341e253c472d75772ab493fdbe6b3b3d6420bb"
+    },
+    {
+      "path": "src/kefu/__init__.py",
+      "sha256": "1ae03a19e5b756e698638477dbdb79db113222c1be65c5b6499f7ab943199eac"
+    },
+    {
+      "path": "src/kefu/api/__init__.py",
+      "sha256": "3dd8d0fb688dae2558655f806599edff251f43182b45a68cc4ec29cb03151712"
+    },
+    {
+      "path": "src/kefu/api/__main__.py",
+      "sha256": "c184009721c42e4b7656f0bf5d596e59379430c2b8b0388d51e38fd52e75815f"
+    },
+    {
+      "path": "src/kefu/api/auth.py",
+      "sha256": "69706508e6b9916faad77b8552650d53a4032332d5dd89fc2bab158df57a1eb2"
+    },
+    {
+      "path": "src/kefu/app.py",
+      "sha256": "9c988ed3aa317bbfed6e49c2267a1615f91b51f1989e2d93cdeb169348ace873"
+    },
+    {
+      "path": "src/kefu/cli.py",
+      "sha256": "5a75d333eee461b46357cd774171566ac245fb516e241192fdf8792a067c465b"
+    },
+    {
+      "path": "src/kefu/contracts.py",
+      "sha256": "6e102a296c945672bb5c173310239bac3097593ff95aab5ac2232fb6335c903f"
+    },
+    {
+      "path": "src/kefu/plugins/context.py",
+      "sha256": "64e763d29e4fac40896904a89b66035439c27dc5b469dcbd892a2d445e5f9e1b"
+    },
+    {
+      "path": "src/kefu/plugins/evidence_gate.py",
+      "sha256": "5d5c5999c0bf4a2a4e322a7e521dcf941104334cbebb732a814bb3819a00e99b"
+    },
+    {
+      "path": "src/kefu/plugins/evidence_sufficiency.py",
+      "sha256": "0947c485caa573ebb802f2070692af9da5a5b5ee9806ba296189f907ac0a04f8"
+    },
+    {
+      "path": "src/kefu/plugins/ingestion.py",
+      "sha256": "1c213df4534fe884f6f31865c1fad939a44dda4778e78652ad9d8399c4f207fc"
+    },
+    {
+      "path": "src/kefu/plugins/knowledge.py",
+      "sha256": "b28a71095ce9347ffc0d2382c17100c000249974f8cfd5ea3920a437ffc151e9"
+    },
+    {
+      "path": "src/kefu/plugins/memory.py",
+      "sha256": "e747a896f54e9b1f21dd9c22fb843bd8332da3e9bff702b6e154b7b11956b2e2"
+    },
+    {
+      "path": "src/kefu/plugins/model.py",
+      "sha256": "daadfdf75bb5b599e179fb5aad7a32af40e035dcd6d365ddc2d15163f87fa623"
+    },
+    {
+      "path": "src/kefu/plugins/official_collection.py",
+      "sha256": "08396a8a78d0ab033e175b0a852067f18d722fee130d3aa6c4de4a50c0883aa9"
+    },
+    {
+      "path": "src/kefu/plugins/sufficiency_calibrator.py",
+      "sha256": "98e64bcbdae9088f6ac2f5df0f996b5ac5ceb7cab49181e25832d623d3d69971"
+    },
+    {
+      "path": "src/kefu/plugins/tools.py",
+      "sha256": "a35b992a2314e96791369d4043489e880210bf12fd554d5c879a380d67f7eada"
+    },
+    {
+      "path": "src/kefu/plugins/triage.py",
+      "sha256": "989e8509cdb2f76f46c8b09bdcede717a6903e6cbd25e73064cccdd9f6a701f4"
+    },
+    {
+      "path": "src/kefu/runtime/__init__.py",
+      "sha256": "82121d5216f2e8d2b898663013ef1c0da002c116643711bc07a9f8bd6a51c7fb"
+    },
+    {
+      "path": "src/kefu/runtime/loop.py",
+      "sha256": "3aa3fc5f93659fefc3f8c7283aa519340e00d53d903a607d33b4dc0986b54ce1"
+    },
+    {
+      "path": "src/kefu/runtime/ports.py",
+      "sha256": "f2c3775e3beb1102172a9a71140e84ce3f12cf60bc7124337f6319d9a7609b16"
+    },
+    {
+      "path": "src/kefu/services.py",
+      "sha256": "57d0e2335d8aeb1b6eaff770a2e7123d835773b001d1beb9ba0207bf7aeba906"
+    },
+    {
+      "path": "src/kefu/settings.py",
+      "sha256": "cb7272a179b93d44cbe4b508c770901aa643d58655ad2c80fe0473cad1c06936"
+    },
+    {
+      "path": "src/kefu/storage/__init__.py",
+      "sha256": "851de5c43e95be366af02cc04b0769fe2377e7533c5ff16ee667ab1b85adb82a"
+    },
+    {
+      "path": "src/kefu/storage/backup.py",
+      "sha256": "b1aaef8f20e0fa54425a059f8b4e4e6485d53b506f47392dcee7b376879a9d06"
+    },
+    {
+      "path": "src/kefu/storage/database.py",
+      "sha256": "c1ecaf7f4bb40f8247ed64301e8d2b83fc976200b6c46fb393d4d3849f3bd0fd"
+    },
+    {
+      "path": "src/kefu/storage/files.py",
+      "sha256": "ed685ee89ce1d104c0ac0beb9c110620c4c541d480b6feb14241d0f464417b23"
+    },
+    {
+      "path": "src/kefu/storage/memory.py",
+      "sha256": "6fc7949b78488198d14067e0606371c4c6a12f2c6d2f51ea93811bb1f8ae16b6"
+    },
+    {
+      "path": "src/kefu/storage/plugins.py",
+      "sha256": "148f41770ee325ea05df3acac18f4c569d7130854092ee39173ddebd58447a28"
+    },
+    {
+      "path": "src/kefu/storage/repository.py",
+      "sha256": "e2faa9341f3d122425be57e1e5e7b11181eba0102a1f66348a741d2743b152d4"
+    },
+    {
+      "path": "src/kefu/storage/schema.py",
+      "sha256": "323accce2318ba18d35384a5ab5d4989b8978bee6b89325929f2d7d2a96764c2"
+    },
+    {
+      "path": "src/kefu/storage/sources.py",
+      "sha256": "8cdfd558a32a63a8794460a6fb16a2d7c607f3045077e9238e5fdc04e2ec00b0"
+    },
+    {
+      "path": "src/kefu/worker.py",
+      "sha256": "03c774be1a5b754c9bcdb73f21fb1d9cc856d53c1ba3894e9649978f21008d62"
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "sha256": "82aed2501c1e0e2c2c8481b83fa3b648ef5f9a5228fb8841d2fb895a7d5a9bd8"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "c3fef3f1873c5267bb39324836e107e534061cbb31d82261f59ee0cdd6fb696e"
+    },
+    {
+      "path": "web/.gitignore",
+      "sha256": "a3ce910c9ed7d06db831db6e774c871c24b10739b0f20515014731ab0e7acf1c"
+    },
+    {
+      "path": "web/.prettierignore",
+      "sha256": "94a02f88b46dee3353ed0729343ebe2daccf3ca9cd89cd4c9a8b3506c8302bd2"
+    },
+    {
+      "path": "web/.prettierrc.json",
+      "sha256": "82b664e3f1527736d03dc02e2e4c48ab04096479b48e2ca5db4d0210dc4cfd4f"
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "91185c8394dd17f810f66c9828f594f54734a77255c2493aebe955401aad792a"
+    },
+    {
+      "path": "web/openapi.json",
+      "sha256": "43c5f8180cdf0cffc1f862db214082167b11200ea2f7a22f231e11f55823113b"
+    },
+    {
+      "path": "web/package-lock.json",
+      "sha256": "b497ea217fa691e6a0eadb354c6dc25d1b49529407875d7eaac6fb3453b8f0e2"
+    },
+    {
+      "path": "web/package.json",
+      "sha256": "6196df98c2032b397ae83e5c553ae20f6eb987420d3742938a1ecf2877661f19"
+    },
+    {
+      "path": "web/src/App.tsx",
+      "sha256": "434782104e4c268aa05b2883738cc8a57e97e819602303ca08b5dbf205c950b1"
+    },
+    {
+      "path": "web/src/Cards.tsx",
+      "sha256": "e71f09d18dd38242e3ea2a9e441397e9eea048042a4025256b89ad645543f56e"
+    },
+    {
+      "path": "web/src/Composer.tsx",
+      "sha256": "219a68b1f5f20b47a9300d13637300936d27e9b202d3920f7d529ae237694644"
+    },
+    {
+      "path": "web/src/Icon.tsx",
+      "sha256": "dfea285dd03aaec7ca19de581e0ab45b8506485ae896805866a9e8f1b6181290"
+    },
+    {
+      "path": "web/src/RichText.tsx",
+      "sha256": "85d7aab777180058bbdae712838a2f74edacc107e262cab773e945c1d8730358"
+    },
+    {
+      "path": "web/src/ServiceInsights.tsx",
+      "sha256": "982808b74d7149375789c6dda8c54d86dd0f640d3de66d6443ffeb0f5a499859"
+    },
+    {
+      "path": "web/src/StaffForm.tsx",
+      "sha256": "4b296ce4f447d1561007e929cfe42e8131756152369553ddb3df5817921195e3"
+    },
+    {
+      "path": "web/src/Workspace.module.css",
+      "sha256": "ca44d58ed5859f3415109da02efcec4d622653fe5e67738520c68a1aa8f9c504"
+    },
+    {
+      "path": "web/src/api.ts",
+      "sha256": "2b6f77b3ad4f8f314149ecd64756d1d66ec41ee3ce78e4c8a5fb13b5eb7bd479"
+    },
+    {
+      "path": "web/src/generated/api.d.ts",
+      "sha256": "651c2e6f66b08c193cb8fe86d378898f2df0280c17361a091cde827d7a2619b8"
+    },
+    {
+      "path": "web/src/main.tsx",
+      "sha256": "055735c1f2a805ceeca8a1376b884c7a8ae1b9d69ad42753b2d23b4e277bfebb"
+    },
+    {
+      "path": "web/src/styles.css",
+      "sha256": "054e57ed95ba080d4060901c8819c1102d92be20e5c798a677989f9a80c389c9"
+    },
+    {
+      "path": "web/src/types.ts",
+      "sha256": "ebc9ca8c4419898f924df03b43f75c8678b67c38bf6af4558b809a0f9f9db645"
+    },
+    {
+      "path": "web/src/useTask.ts",
+      "sha256": "a93019c03c7f35ecb7fad2488637765c136edae7c4fa58dce349581d9b874f87"
+    },
+    {
+      "path": "web/tsconfig.json",
+      "sha256": "f5556f4112383e64f0ac4c5476bc97c5eb1cc5e12a028d2a9a08ed242e7a772f"
+    },
+    {
+      "path": "web/vite.config.ts",
+      "sha256": "e239a25c52a9f022b60cdd4ea28694f83de14eb52e640ce2e9eb603cb58bca32"
+    }
+  ]
+}

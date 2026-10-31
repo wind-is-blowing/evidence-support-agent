@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-31",
+  "install": "uv sync --frozen --offline --no-dev, fresh isolated venv: passed",
+  "smoke_tests_passed": 4,
+  "smoke_tests_failed": 0,
+  "runtime_source_files_verified_unchanged": 70,
+  "secret_scan": "No matches for selected known credential/private-key patterns; not a universal guarantee",
+  "live_llm_called": false,
+  "frontend": "npm ci + TypeScript and Vite production build: passed",
+  "compose": "docker compose config --quiet: passed",
+  "integration": "Not rerun: Docker Desktop Linux engine unavailable; requires PostgreSQL/Redis for complete startup"
+}

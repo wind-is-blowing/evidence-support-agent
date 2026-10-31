@@ -1,0 +1,71 @@
+[project]
+name = "kefu-agent"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.20.0",
+    "argon2-cffi>=25.1.0",
+    "cryptography>=50.0.1",
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "openai>=3.14.0",
+    "pgvector>=0.5.0",
+    "pillow>=12.3.0",
+    "psycopg[binary,pool]>=3.3.5",
+    "pydantic-settings>=2.15.0",
+    "python-multipart>=0.0.32",
+    "redis>=8.1.0",
+    "sqlalchemy[asyncio]>=2.0.53",
+    "tzdata>=2026.4",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[project.optional-dependencies]
+embedding = [
+    "sentence-transformers>=6.0.1",
+]
+ingestion = [
+    "beautifulsoup4>=4.15.0",
+    "docling>=2.127.0",
+    "transformers>=5.17.0",
+]
+benchmark = [
+    "haystack-ai>=3.4.0",
+    "jieba>=0.42.1",
+    "sentence-transformers>=6.0.1",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.9,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "kefu"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/kefu/app.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.7",
+]

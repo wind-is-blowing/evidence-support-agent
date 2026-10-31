@@ -1,0 +1,214 @@
+name: kefu-agent
+
+x-app-env: &app-env
+  ENVIRONMENT: ${ENVIRONMENT:-local}
+  APP_ORIGIN: ${APP_ORIGIN:-http://localhost}
+  SECURE_COOKIES: ${SECURE_COOKIES:-false}
+  SIMULATED_BUSINESS: "true"
+  DATABASE_URL: postgresql+psycopg://kefu_exec:${KEFU_EXEC_PASSWORD:?Set KEFU_EXEC_PASSWORD}@postgres:5432/kefu
+  READ_DATABASE_URL: postgresql+psycopg://kefu_read:${KEFU_READ_PASSWORD:?Set KEFU_READ_PASSWORD}@postgres:5432/kefu
+  WORK_DATABASE_URL: postgresql+psycopg://kefu_work:${KEFU_WORK_PASSWORD:?Set KEFU_WORK_PASSWORD}@postgres:5432/kefu
+  REDIS_URL: redis://redis:6379/0
+  MODEL_MODE: ${MODEL_MODE:-demo}
+  MODEL_BASE_URL: ${MODEL_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}
+  MODEL_API_KEY: ${MODEL_API_KEY:-}
+  MODEL_NAME: ${MODEL_NAME:-qwen3.5-35b-a3b}
+  MODEL_REVISION: ${MODEL_REVISION:-provider-unversioned}
+  TASK_TOKEN_LIMIT: ${TASK_TOKEN_LIMIT:-1000000}
+  DAILY_TOKEN_LIMIT: ${DAILY_TOKEN_LIMIT:-500000}
+  MATERIALS_ROOT: /data/materials
+  CONTEXT_ROOT: /data/context
+  SKILLS_ROOT: /app/skills
+  CONTEXT_CURSOR_SECRET: ${CONTEXT_CURSOR_SECRET:?Set CONTEXT_CURSOR_SECRET}
+  DELETION_LEDGER_PATH: /data/privacy/deletions.jsonl
+  MAINTENANCE: ${MAINTENANCE:-false}
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: deploy/Dockerfile
+    target: runtime
+  image: kefu-agent-runtime:0.1.0
+  user: "10001:10001"
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=64m,uid=10001,gid=10001"]
+  init: true
+  restart: unless-stopped
+  stop_grace_period: 75s
+  networks: [backend]
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    user: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: kefu
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      KEFU_EXEC_PASSWORD: ${KEFU_EXEC_PASSWORD:?Set KEFU_EXEC_PASSWORD}
+      KEFU_READ_PASSWORD: ${KEFU_READ_PASSWORD:?Set KEFU_READ_PASSWORD}
+      KEFU_WORK_PASSWORD: ${KEFU_WORK_PASSWORD:?Set KEFU_WORK_PASSWORD}
+      KEFU_MIGRATE_PASSWORD: ${KEFU_MIGRATE_PASSWORD:?Set KEFU_MIGRATE_PASSWORD}
+      KEFU_IMPORT_PASSWORD: ${KEFU_IMPORT_PASSWORD:?Set KEFU_IMPORT_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./deploy/init-roles.sh:/docker-entrypoint-initdb.d/10-kefu-roles.sh:ro
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+      - /var/run/postgresql:rw,nosuid,size=16m,uid=999,gid=999,mode=0775
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres -d kefu"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    networks: [backend]
+
+  redis:
+    image: redis:7.4.11-alpine@sha256:ff02b58f971e7d7d156a1267e283fcbbeee91773b6aa36c49dac28ecfe28eadf
+    user: redis
+    command: [redis-server, --save, "", --appendonly, "no", --maxmemory, 128mb, --maxmemory-policy, noeviction]
+    read_only: true
+    tmpfs: ["/data:rw,nosuid,size=16m", "/tmp:rw,noexec,nosuid,size=16m"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks: [backend]
+
+  api:
+    <<: *app
+    command: [python, -m, kefu.api]
+    environment:
+      <<: *app-env
+      BIND_HOST: 0.0.0.0
+    volumes:
+      - materials:/data/materials
+      - privacy:/data/privacy
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_started}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready',timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+
+  worker:
+    <<: *app
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      target: runtime
+      args:
+        ENABLE_EMBEDDING: ${ENABLE_EMBEDDING:-false}
+    image: kefu-agent-worker:0.1.0
+    command: [python, -m, kefu.worker]
+    environment:
+      <<: *app-env
+      WORKER_CONCURRENCY: "4"
+      EMBEDDING_MODEL_PATH: ${EMBEDDING_MODEL_PATH:-}
+      EMBEDDING_REVISION: ${EMBEDDING_REVISION:-}
+    volumes:
+      - materials:/data/materials:ro
+      - context:/data/context
+      - privacy:/data/privacy
+      - models:/models:ro
+    networks: [backend, outbound]
+    depends_on:
+      api: {condition: service_healthy}
+
+  caddy:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+      target: web-server
+    image: kefu-agent-web:0.1.0
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-http://localhost}
+    user: "10001:10001"
+    ports:
+      - ${BIND_ADDRESS:-127.0.0.1}:80:8080
+      - ${BIND_ADDRESS:-127.0.0.1}:443:8443
+      - ${BIND_ADDRESS:-127.0.0.1}:443:8443/udp
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=16m,uid=10001,gid=10001"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+    networks: [backend, outbound]
+
+  migrate:
+    <<: *app
+    build: {context: ., dockerfile: deploy/Dockerfile, target: maintenance}
+    image: kefu-agent-maintenance:0.1.0
+    profiles: [tools]
+    restart: "no"
+    command: [python, -m, alembic, upgrade, head]
+    environment:
+      MIGRATION_DATABASE_URL: postgresql+psycopg://kefu_migrate:${KEFU_MIGRATE_PASSWORD:?Set KEFU_MIGRATE_PASSWORD}@postgres:5432/kefu
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  import:
+    <<: *app
+    build: {context: ., dockerfile: deploy/Dockerfile, target: importer}
+    image: kefu-agent-importer:0.1.0
+    profiles: [tools]
+    restart: "no"
+    command: [python, -m, kefu.cli, import-knowledge, --manifest, /app/data/sources.jsonl]
+    environment:
+      IMPORT_DATABASE_URL: postgresql+psycopg://kefu_import:${KEFU_IMPORT_PASSWORD:?Set KEFU_IMPORT_PASSWORD}@postgres:5432/kefu
+      READ_DATABASE_URL: postgresql+psycopg://kefu_import:${KEFU_IMPORT_PASSWORD:?Set KEFU_IMPORT_PASSWORD}@postgres:5432/kefu
+    volumes:
+      - ./data:/app/data:ro
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  ops:
+    <<: *app
+    build: {context: ., dockerfile: deploy/Dockerfile, target: maintenance}
+    image: kefu-agent-maintenance:0.1.0
+    profiles: [tools]
+    restart: "no"
+    command: [python, -m, kefu.cli, --help]
+    environment:
+      <<: *app-env
+      MIGRATION_DATABASE_URL: postgresql+psycopg://kefu_migrate:${KEFU_MIGRATE_PASSWORD:?Set KEFU_MIGRATE_PASSWORD}@postgres:5432/kefu
+      IMPORT_DATABASE_URL: postgresql+psycopg://kefu_import:${KEFU_IMPORT_PASSWORD:?Set KEFU_IMPORT_PASSWORD}@postgres:5432/kefu
+    volumes:
+      - materials:/data/materials
+      - context:/data/context
+      - privacy:/data/privacy
+      - backups:/backups
+    depends_on:
+      postgres: {condition: service_healthy}
+
+networks:
+  backend: {internal: true}
+  outbound: {}
+
+volumes:
+  postgres-data: {}
+  materials: {}
+  context: {}
+  privacy: {}
+  models: {}
+  backups: {}
+  caddy-data: {}
+  caddy-config: {}
